@@ -183,7 +183,7 @@ class UnsungHero:
     @classmethod
     def view_source(cls):
         
-        link = "https://github.com/DarthRommy/MogiCasher/"
+        link = "https://github.com/DarthRommy/Mogi_Casher/"
         webbrowser.open(link)
 
 
