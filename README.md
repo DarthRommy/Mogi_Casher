@@ -32,7 +32,7 @@ Readmeにようこそ！
    - [バーコード読み取り時](README.md#バーコード読み取り時)
 
 ## 概要
-CSVファイルとlistオブジェクトを使用するシンプルなソフトです。  
+CSVファイルとリストを使用する(コアの部分は)シンプルなソフトです。  
 システムの参考 -> [LC_Manager](https://github.com/parsely1231/LC_Manager)
 
 ### 機能
