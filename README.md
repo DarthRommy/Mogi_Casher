@@ -88,11 +88,13 @@ DLする際はmogicasherディレクトリごとDLするのがお勧めです。
         ┗ __init__,py
         ┗ interface.py
         ┗ style.py
+
       ┗ performer
         ┗ __init__.py
         ┗ handler.py
         ┗ performer.py
         ┗ unsunghero.py
+
       ┗ system
         ┗ fonts
           ┗ ...
@@ -102,13 +104,14 @@ DLする際はmogicasherディレクトリごとDLするのがお勧めです。
           ┗ ...
         ┗ report
           ┗ ...
+
       ┗ mogicasher.py
 
 または※
 
     dist
     ┗ casher
-        ┗ system
+      ┗ system
         ┗ fonts
           ┗ ...
         ┗ images
@@ -117,7 +120,8 @@ DLする際はmogicasherディレクトリごとDLするのがお勧めです。
           ┗ ...
         ┗ report
           ┗ ...
-        ┗ mogicasher.exe
+
+      ┗ mogicasher.exe
 
 ※casher.pyをexe化した場合の構成
 
