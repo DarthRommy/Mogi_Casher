@@ -79,26 +79,44 @@ Python3のソフトです。
 EAN(JAN)8桁を想定していますが、バーコードリーダーが読み取れる形式すべてに対応しています。
 
 ### ファイル構成
-このソフトが動作する**最小構成**です。
+このソフトのファイル構成です。
+DLする際はmogicasherディレクトリごとDLするのがお勧めです。
 
     dist
-    ┗ casher
-        ┗ fonts
-            ┗...
-        ┗ images
-            ┗...
-        ┗ casher.py
+    ┗ mogicasher
+      ┗ interface
+        ┗ __init__,py
+        ┗ interface.py
         ┗ style.py
+      ┗ performer
+        ┗ __init__.py
+        ┗ handler.py
+        ┗ performer.py
         ┗ unsunghero.py
+      ┗ system
+        ┗ fonts
+          ┗ ...
+        ┗ images
+          ┗ ...
+        ┗ log
+          ┗ ...
+        ┗ report
+          ┗ ...
+      ┗ mogicasher.py
 
 または※
 
     dist
     ┗ casher
+        ┗ system
         ┗ fonts
-            ┗...
+          ┗ ...
         ┗ images
-            ┗...
+          ┗ ...
+        ┗ log
+          ┗ ...
+        ┗ report
+          ┗ ...
         ┗ mogicasher.exe
 
 ※casher.pyをexe化した場合の構成
