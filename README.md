@@ -4,7 +4,10 @@
 ![PySimpleGUI version](https://img.shields.io/badge/PySimpleGUI-4.45.0-orange)
 ![pandas version](https://img.shields.io/badge/pandas-1.3.1-green)
 
-Readmeにようこそ！
+Readmeにようこそ！  
+引継ぎでガチャガチャしそうなのでGitHubに上げてしまいました。  
+来年の担当者は好きにコードいじっちゃってください。
+
 使い方の画像の更新は本体のアプデよりかなり遅いことをご了承ください。
 
 **いろんなことが適当に書いてあります！！！**
@@ -127,10 +130,10 @@ Python3のソフトです。動作には以下の外部ライブラリが必要�
 - [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/)
 
 ### CSVファイルの形式
-- UI的には5品目を想定していますが、**何品目でも対応できます。**
-- 最初に読み込むCSVのファイル名はなんでもええで
-- CSVのカラム名はどの列も指定はありません。
-- また、下では1列目が#~の連番ですが、**どんな文字列にしても問題ありません。**
+- 何品目でも対応できます。
+- Loadで読み込むCSVのファイル名はなんでもOK。
+- CSVのカラム名はどの列も指定なし。
+- また、下では1列目が#~の連番ですが、**どんな文字列にしてもOK。**
   - ※英語フォントなのでアルファベット以外は表示がダサくなります。
 
 | (tag) | CODE | PRICE | UNITS |
@@ -142,11 +145,13 @@ Python3のソフトです。動作には以下の外部ライブラリが必要�
 
 ### 対応コード
 
-バーコードリーダーが読み取れるならなんでもあり
+バーコードリーダーが読み取れるならなんでもOK。  
+例) EAN(JAN)13桁/8桁, CODE39, CODE128, etc...
 
 ### ファイル構成
 このソフトのファイル構成です。
-mogicasherフォルダの名前は変えてもOK。
+mogicasherフォルダの名前は変えてもOK。  
+各スクリプトファイルについては[補足](/README.md#補足)
 
     dist
     ┗ mogicasher
@@ -262,6 +267,37 @@ window["-SUBTOTAL-"].update("¥{}".format(calc_subtotal(database, history)))
 
 ## 補足
 Pythonかじってる人向け
+
+### 各ファイルの説明
+#### interface.py
+ウィンドウのレイアウトを書いた場所。 
+class: Interface  
+Location: [interface.py](/mogicasher/interface/interface.py)
+
+#### style.py
+ウィンドウのレイアウトのうち、引数が多くなるものについて辞書型でまとめた。  
+class: None  
+Location: [style.py](/mogicasher/interface/style.py)
+
+#### handler.py
+ウィンドウ上のイベントを受け取り、それに応じて関数を実行する。
+class: Handler  
+Location: [handler.py](/mogicasher/performer/handler.py)
+
+#### performer.py
+イベントに応じてhandlerに呼び出される関数を書いた場所。
+class: Performer  
+Location: [performer.py](/mogicasher/performer/performer.py)
+
+#### unsunghero.py
+ウィンドウに直接影響しない(=Interfaceのインスタンスを使わない)関数をまとめた場所。
+class: UnsungHero  
+Location: [unsunghero.py](/mogicasher/performer/unsunghero.py)
+
+#### mogicasher.py
+ウィンドウの起動から終了までの全ての処理をまとめる場所。  
+class: MogiCasher  
+Location: [mogicasher.py](/mogicasher/mogicasher.py)
 
 ### レイアウト変更
 MogiCasherはPySimpleGUIを使用してます。  
