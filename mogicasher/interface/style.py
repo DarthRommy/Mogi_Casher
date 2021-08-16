@@ -1,14 +1,14 @@
 #----------style.py----------
-from pathlib import Path
+from performer.unsunghero import UnsungHero
 
-dirname = Path(Path(__file__).parent).parent
+parent_dir = UnsungHero.parent_dir
 
 #------Window Style------
 window_style = {
     'return_keyboard_events': True,
     'keep_on_top': True,
     'titlebar_font': ('sf ui display bold',20),
-    'titlebar_icon': f'{dirname}/system/images/titlebar_icon.png',
+    'titlebar_icon': f"{parent_dir('images')}/titlebar_icon.png",
     'use_custom_titlebar': True,
     'grab_anywhere': False,
     }

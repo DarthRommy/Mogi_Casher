@@ -15,7 +15,7 @@ class Interface:
         #----------Database----------
         self.database = database
         self.history = []
-        self.dirname = f"{Path(Path(__file__).parent).parent}/system"
+        self.dirname = UnsungHero.parent_dir("images")
         
 
         #----------Theme------------
@@ -30,19 +30,19 @@ class Interface:
         self.tab_list = ["home", "analyze", "setting", "exit"]
 
         self.select_home = sg.Column(pad=(0,0), layout=[
-            [sg.Image(f'{self.dirname}/images/home_bright.png', enable_events=True, k='home_image', tooltip="メイン画面"),
+            [sg.Image(f'{self.dirname}/home_bright.png', enable_events=True, k='home_image', tooltip="メイン画面"),
              sg.Text('Home', **selected_style, k=self.tab_list[0], tooltip="メイン画面")]])
         
         self.select_analyze = sg.Column(pad=(0,0), layout=[
-            [sg.Image(f'{self.dirname}/images/analyze.png', enable_events=True, k='analyze_image', tooltip="各模擬店のデータを集計します"),
+            [sg.Image(f'{self.dirname}/analyze.png', enable_events=True, k='analyze_image', tooltip="各模擬店のデータを集計します"),
              sg.Text('Analyze', **select_style, k=self.tab_list[1], tooltip="各店のデータを集計します")]])
 
         self.select_setting = sg.Column(pad=(0,0), layout=[
-            [sg.Image(f'{self.dirname}/images/setting.png', enable_events=True, k='setting_image', tooltip="マニアックな設定ができます"),
+            [sg.Image(f'{self.dirname}/setting.png', enable_events=True, k='setting_image', tooltip="マニアックな設定ができます"),
              sg.Text('Setting', **select_style, k=self.tab_list[2], tooltip="マニアックな設定ができます")]])
 
         self.select_exit = sg.Column(pad=(0,(15,0)), layout=[
-            [sg.Image(f'{self.dirname}/images/exit.png', enable_events=True, k='exit_image', tooltip="待て!!!保存したか???"),
+            [sg.Image(f'{self.dirname}/exit.png', enable_events=True, k='exit_image', tooltip="待て!!!保存したか???"),
              sg.Text('Exit', **select_style, k=self.tab_list[3], tooltip="")]])
 
         self.select_air_1 = sg.Column(pad=(5,30), layout=[[sg.Text(' ', font=('sf ui display bold', 12))]])

@@ -6,7 +6,6 @@ import os
 import shutil
 import subprocess
 import webbrowser
-from pathlib import Path
 
 import pandas as pd
 import PySimpleGUI as sg
@@ -16,7 +15,21 @@ class UnsungHero:
     """
     UnsungHero contains various functions that provides multiple features of this software.
     """
-    dirname = f"{Path(Path(__file__).parent).parent}/system"
+    @classmethod
+    def parent_dir(cls, target):
+        """
+        parent_dir returns "system/target" folder path from current directory.
+        
+        Args:
+            target str:
+                the folder you want to locate in "system" folder.
+
+        Returns:
+            str:
+                Path of the target folder.
+        """
+        return f"{os.getcwd()}/system/{target}"
+
 
     @classmethod
     def subprocess_args(cls, include_stdout=True):
@@ -62,7 +75,7 @@ class UnsungHero:
                 Other: The imported data was correct.
         """
         # logフォルダ内のファイル一覧をゲットして作成日時で並べ替える
-        path = f"{UnsungHero.dirname}/log/*.csv"
+        path = f"{UnsungHero.parent_dir('log')}/*.csv"
         files = glob.glob(path)
         files.sort(reverse=True, key=lambda x: os.path.getctime(x))
 
@@ -138,7 +151,7 @@ class UnsungHero:
     @classmethod
     def save_profile(cls, database, reference=False, **kwargs):
         
-        path = f"{UnsungHero.dirname}/log"
+        path = f"{UnsungHero.parent_dir('log')}"
         if not os.path.exists(path):
             os.mkdir(path)
 
@@ -172,10 +185,9 @@ class UnsungHero:
             print (x)
 
 
-    #----------インスタンスに関わらない関数----------
     @classmethod
     def clean_logs(cls):
-        target = f"{UnsungHero.dirname}/log"
+        target = f"{UnsungHero.parent_dir('log')}"
         shutil.rmtree(target)
         os.mkdir(target)
 
@@ -193,7 +205,7 @@ class UnsungHero:
         try:
             file = sg.popup_get_file("", file_types=(("csv", "*profile*.csv"),), no_window=True)
 
-            copy_dir = f"{UnsungHero.dirname}/report"
+            copy_dir = f"{UnsungHero.parent_dir('report')}"
             if os.path.exists(copy_dir):
                 os.mkdir
 
@@ -206,7 +218,7 @@ class UnsungHero:
     @classmethod
     def font_install(cls):
         
-        font_files = glob.glob(f"{UnsungHero.dirname}/fonts/*.ttf")
+        font_files = glob.glob(f"{UnsungHero.parent_dir('fonts')}/*.ttf")
         for x in font_files:
             # exe化した際に起きるエラーを防ぐためにこの形式を使う
             try:

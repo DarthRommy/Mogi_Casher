@@ -3,7 +3,6 @@ import os
 
 import pandas as pd
 import PySimpleGUI as sg
-from pathlib import Path
 from performer.unsunghero import UnsungHero
 
 """
@@ -13,15 +12,15 @@ eventごとの処理を記述した場所。
 class Performer:
     def __init__(self, window: sg.Window):
         self.window = window
-        self.dirname = Path(Path(__file__).parent).parent
+        self.dirname = UnsungHero.parent_dir
 
 
     def change_layout(self, event, database, history, tab_list, **kwargs):
 
         for x in tab_list:
             change_image = f"{x}_image"
-            image_loc = f'{self.dirname}/system/images/{x}.png'
-            image_loc_brg = f'{self.dirname}/system/images/{x}_bright.png'
+            image_loc = f'{self.dirname("images")}/{x}.png'
+            image_loc_brg = f'{self.dirname("images")}/{x}_bright.png'
 
             #選んだやつは白く
             if x == event:

@@ -5,28 +5,16 @@ from performer.performer import Performer
 from performer.handler import Handler
 from performer.unsunghero import UnsungHero
 
-
 """
 めも：
 レイアウトと処理を別ファイルで書くことで機能の変更をしやすくしてみた。
-
-mogicasher v1.5
-    #---New Features---#
-    1. Analyze Tab is now available!!!(1.5.0)
-        #Temporarily disabled.(1.5.0.1)
-        #Re-activated!(1.5.1)
-    2. Changed the method to determine that the code has been loaded at least once!(1.5.0)
-    3. Changed the method to get the latest-autosaved files!(1.5.0.0)
-    4. Changed Layout!(1.5.0) 
-    5. Deleted custom theme...(1.5.1)
 """
-
 
 class MogiCasher:
     @classmethod
     def main(cls):
         def_color = "lightblue1" #お好みで
-        version = "1.5.1"
+        version = "1.5.1.1"
         def_database = UnsungHero.get_autosave()
 
         argsdict = {"color":def_color, "database":def_database, "version":version}
