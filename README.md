@@ -118,7 +118,7 @@ CSVファイルとリストを使用する(コアの部分は)シンプルなソ
 - [ ] バーコード画像の生成機能はない...
 
 ### 動作環境
-Python3のソフトです。動作には以下の外部ライブラリが必要です。*[アプリケーション化]*(/README.md#補足)  
+Python3のソフトです。動作には以下の外部ライブラリが必要です。-> *[アプリケーション化](/README.md#補足)*  
 - [pandas](https://pandas.pydata.org/)
 - [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/)
 
@@ -265,7 +265,7 @@ Pythonかじってる人向け
 ### レイアウト変更
 MogiCasherはPySimpleGUIを使用してます。  
 レイアウトの記述方法は[PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/call%20reference/)に従ってください。  
-また、引数が多くて見にくくなるものは[style.py](/mogicasher/interface/casher.py)のように別で辞書型宣言することもできます。
+また、引数が多くて見にくくなるものは[style.py](/mogicasher/interface/style.py)のように別で辞書型宣言することもできます。
 
 ### アプリケーション化
 [mogicasher.py](/mogicasher/mogicasher.py)を指定してください。  
