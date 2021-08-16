@@ -22,9 +22,6 @@ Readmeにようこそ！
    - [CSVファイルの形式](/README.md#CSVファイルの形式)
    - [対応コード](/README.md#対応コード)
    - [ファイル構成](/README.md#ファイル構成)
-1. [解説](/README.md#解説)
-   - [リスト](/README.md#リスト)
-   - [バーコード読み取り時](README.md#バーコード読み取り時)
 1. [補足](/README.md#補足)
 
 ## 使い方
@@ -195,75 +192,6 @@ mogicasherフォルダの名前は変えてもOK。
       ┗ mogicasher.exe
 
 ※casher.pyをexe化した場合の構成
-
-## 解説
-基本のシステムだけ説明しときます。
-
-### リスト
-このソフトは以下のリストを使います。  
-全ての処理はこのリストに基づきます。  
-ちなみにこれらに合計金額は含まれず、関数を使っていちいち合計金額を計算し表示する仕組みです。
-```
-# 読み込んだCSVデータを変換したリスト
-# 確定した売り上げの計算に使う。
-database = [["#1", "xxxxxxxx", xxx, xxx], ...]
-
-# 読み取ったバーコードを追加していくリスト
-# Check Out前の仮の売り上げの計算に使う。
-history = ["xxxxxxxx", "xxxxxxxx", ...]
-```
-### バーコード読み取り時
-ざっくり画像で解説するとこんな感じ。  
-![reading](https://user-images.githubusercontent.com/88261399/128671421-aef9b048-8b70-48c8-8e36-6fa042a07b55.png)
-
-具体例で説明してみましょう。  
-画面のこの部分が変わります。  
-以下のコードで登録されたバーコード以外をブロックします。
-```
-input: 入力値
-window: PySimpleGUIのWindowオブジェクト
-
-# databaseの"CODE"列からコードの一覧を作る
-codes = [database[x][1] for x in range(len(database))]
-
-try:
-   # "codes.index(input)"で、inputがcodesに含まれない場合エラーが出る。
-   # 入力欄のすぐ下にある、入力値のタグや値段を表示するテキストをupdateする。
-   # 正常に処理が行われた場合、historyにinputが追加される。
-   
-   tag = database[codes.index(input)][0]
-   price = database[codes.index(input)][2]
-   
-   history.append(input)
-   
-   window["-RECENT-"].update(">{} {} ¥{}".format(tag, input, price))
-   
-except ValueError:
-   # エラーが出た場合inputを無視する。
-   pass
-```
-また、精算機能に対応するため支払金額を表示する必要があります。  
-以下のプログラムは入力があるたびに、↑のtry節の続きに実行されます。
-```
-...
-history.append(input)
-
-def calc_subtotal(database, history):
-   # databaseを使ってコードごとのhistory内の数を数え、それぞれ値段を掛ける。
-   # つまり品目ごとの売り上げが出るので、それをsubtotalに足していく。
-   
-   # 一時データの売り上げを格納する変数
-   subtotal = 0
-   
-   for x in database:
-      subtotal += history.count(x[1])*x[2]
-   
-   # 仮の売り上げを返す
-   return subtotal
-
-# "Subtotal"テキストを更新する
-window["-SUBTOTAL-"].update("¥{}".format(calc_subtotal(database, history)))
-```
 
 ## 補足
 Pythonかじってる人向け
