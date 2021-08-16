@@ -1,6 +1,7 @@
 #----------interface.py----------
 
 import PySimpleGUI as sg
+from PySimpleGUI.PySimpleGUI import VerticalSeparator
 
 from performer.performer import UnsungHero
 from interface.style import *
@@ -27,6 +28,7 @@ class Interface:
         #----------LEFT AREA----------
         #Tab Select Frame
 
+        # 切り替えレイアウトのキー
         self.tab_list = ["home", "analyze", "setting", "exit"]
 
         self.select_home = sg.Column(pad=(0,0), layout=[
@@ -61,7 +63,7 @@ class Interface:
         self.load_frame = sg.Frame("Load Data", font=('sf ui display bold',20), layout=[
             [sg.Button('Browse', font=('sf ui display bold',11), k='-BROWSE-', disabled=self.database != UnsungHero.get_autosave()),
              sg.VerticalSeparator(),
-             sg.Text('Find "profile.csv"', font=('sf ui display bold',14), text_color="#5f5f5f", size=(18,1))]
+             sg.Text('Find CSV file', font=('sf ui display bold',14), text_color="#5f5f5f", size=(18,1))]
         ])
 
         self.input_frame = sg.Frame('Input', font=('sf ui display bold',30), layout=[
@@ -80,25 +82,25 @@ class Interface:
         
         #Analyze Tab
         self.listbox_list = ["Overall"]
-        self.antable_list = [["Total", "¥0"]]
-        self.database_list = []
+        self.antable_list = [["", ""]]
 
-        self.add_data_frame = sg.Frame("Add Data", font=("sf ui display bold",20), layout=[
-            [sg.Button("Browse", font=("sf ui display bold",11), k=UnsungHero.add_profile),
+        self.add_data_frame = sg.Frame("Add Data", font=("sf ui display bold",18), layout=[
+            [sg.Button("Browse", font=("sf ui display bold",11), k=UnsungHero.add_profile, tooltip="ファイルをコピー"),
              sg.VerticalSeparator(),
-             sg.Text("Add Saved Profile", font=("sf ui display bold",14), text_color="#5f5f5f")]
+             sg.Text("▶▶▶", font=("sf ui display bold",15), text_color="#5f5f5f", pad=(12,0)),
+             sg.VerticalSeparator(),
+             sg.Button("Refresh", font=("sf ui display bold",11), k="-REFRESH-", tooltip="表の更新")]
         ])
 
-        self.antable_frame = sg.Frame("Analyze", font=("sf ui display bold",30), layout=[
-            [sg.Listbox(self.listbox_list, enable_events=True, k="-ANLIST-", font=("sf ui display light",14), size=(15,4), no_scrollbar=True, default_values=self.listbox_list[0]),
-             sg.Table(self.antable_list, k="-ANTABLE-", **analyze_table_style)]
+        self.antable_frame = sg.Frame("Analyze", font=("sf ui display bold",22), layout=[
+            [sg.Combo(self.listbox_list, k="-ANLIST-", default_value=self.listbox_list[0], **analyze_listbox_style)],
+            [sg.Table(self.antable_list, k="-ANTABLE-", **analyze_table_style)]
         ])
 
         self.analyze_frame = [
             [sg.Column(layout=[
                 [self.add_data_frame],
                 [self.antable_frame]
-                #[sg.Text("Not Available Now...", font=("sf ui display bold", 20))]
             ])]
         ]
 
@@ -110,13 +112,14 @@ class Interface:
         self.setting_right = sg.Column([
             [sg.Text('Custom Font', font=('sf ui display bold',14), k=UnsungHero.font_install, enable_events=True, pad=((5,16),2), text_color="#2d5cff", tooltip="画面がかっこよくなります")],
             [sg.Text("Delete Log", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="自動保存したデータを削除できます", k=UnsungHero.clean_logs, enable_events=True)],
+            [sg.Text("Delete Report", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="Analyzeに使うデータを削除できます", k=UnsungHero.clean_reports, enable_events=True)],
             [sg.Text("GitHub", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="ソースコードはここをクリック", k=UnsungHero.view_source, enable_events=True)]
         ])
 
         self.settings_frame = sg.Frame('Setting', font=('sf ui display bold',30), layout=[
             [self.setting_left, sg.VerticalSeparator(pad=(10,5)), self.setting_right],
             [sg.Button('Restart', font=('sf ui display bold', 14), k='-RE-', tooltip="変更したら押してね"),
-             sg.Text(f"¶ mogi casher v{self.version}", font=("sf ui display light",12))]
+             sg.Text(f"¶ MogiCasher v{self.version}", font=("sf ui display light",12))]
             ])
 
         self.setting_frame = [
@@ -125,9 +128,9 @@ class Interface:
 
         #Switchable Frame
         self.middle_frame = sg.Column([
-            [UnsungHero.collapse(self.home_frame, "HOME", True)],
-            [UnsungHero.collapse(self.analyze_frame, "ANALYZE", False)],
-            [UnsungHero.collapse(self.setting_frame, "SETTING", False)]
+            [UnsungHero.collapse(self.home_frame, self.tab_list[0].upper(), True)],
+            [UnsungHero.collapse(self.analyze_frame, self.tab_list[1].upper(), False)],
+            [UnsungHero.collapse(self.setting_frame, self.tab_list[2].upper(), False)]
         ])
 
         #----------RIGHT AREA----------

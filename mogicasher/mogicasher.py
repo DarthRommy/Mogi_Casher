@@ -14,7 +14,7 @@ class MogiCasher:
     @classmethod
     def main(cls):
         def_color = "lightblue1" #お好みで
-        version = "1.5.1.1"
+        version = "1.5.2"
         def_database = UnsungHero.get_autosave()
 
         argsdict = {"color":def_color, "database":def_database, "version":version}
@@ -48,6 +48,7 @@ class MogiCasher:
         database = interface.database
         history = interface.history
         tab_list = interface.tab_list
+        listbox_list = interface.listbox_list
         
         restart = False
         darkmode = False
@@ -60,7 +61,7 @@ class MogiCasher:
             except AttributeError:
                 pass
 
-            database, history = handler.handle(event, values, tab_list, database, history)
+            database, history, listbox_list = handler.handle(event, values, tab_list, database, history, listbox_list)
 
             darkmode = values["-DARK-"]
 
@@ -68,6 +69,8 @@ class MogiCasher:
                 if event == "-RE-":
                     restart = True
                 break
+
+            interface.window["-INPUT-"].set_focus()
 
         interface.window_close()
 

@@ -36,22 +36,22 @@ table_style = {
     "header_font": ('sf ui display bold', 14),
     "num_rows": 5,
     "hide_vertical_scroll": True,
-    "headings": ["   ", "   CODE   ", " PRICE ", " UNITS "]
+    "headings": ["   TAG   ", "   CODE   ", " PRICE ", " UNITS "],
+    "enable_events": True,
 }
 
+#------Analyze------
 analyze_table_style = {
     "font": ('sf ui display light', 13),
-    "header_font": ('sf ui display bold', 14),
+    "header_font": ('sf ui display bold', 13),
     "num_rows": 5,
     "hide_vertical_scroll": True,
-    "headings": ["     TAG     ", " SALES "],
+    "headings": ["     TAG     ", "   SALES   "],
 }
 
-themes_table_style = {
-    "headings": ["Font Name"],
-    "font": ('sf ui display light', 14),
-    "header_font": ('sf ui display bold', 14),
-    "num_rows": 5,
-    "hide_vertical_scroll": False,
+analyze_listbox_style = {
     "enable_events": True,
+    "font": ("sf ui display light",13),
+    "size": (23,4),
+    "readonly": True
 }

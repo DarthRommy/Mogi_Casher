@@ -19,17 +19,19 @@ class Handler:
             "analyze": self.performer.change_layout,
             "setting": self.performer.change_layout,
             "exit": self.performer.change_layout,
+            "-REFRESH-": self.performer.refresh_analyze,
+            "-ANLIST-": self.performer.switch_analyze,
         }
 
-    def handle(self, event, values, tab_list, database, history):
+    def handle(self, event, values, tab_list, database, history, listbox_list):
         if callable(event):
             event()
-            return database, history
+            return database, history, listbox_list
 
         elif event not in self.functions:
-            return database, history
+            return database, history, listbox_list
         
         event_func = self.functions[event]
-        database, history = event_func(**{"event":event, "values":values, "tab_list":tab_list, "database": database, "history":history})
+        database, history, listbox_list = event_func(**{"event":event, "values":values, "tab_list":tab_list, "database": database, "history":history, "listbox_list": listbox_list})
         
-        return database, history
+        return database, history, listbox_list

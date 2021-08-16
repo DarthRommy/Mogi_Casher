@@ -16,7 +16,7 @@ class UnsungHero:
     UnsungHero contains various functions that provides multiple features of this software.
     """
     @classmethod
-    def parent_dir(cls, target):
+    def parent_dir(cls, target: str):
         """
         parent_dir returns "system/target" folder path from current directory.
         
@@ -97,7 +97,7 @@ class UnsungHero:
         
 
     @classmethod
-    def collapse(cls, layout, key, visible):
+    def collapse(cls, layout: list, key, visible: bool):
         """
         collapse adjusts the size of the window to fit the layout.
         About this -> https://pysimplegui.readthedocs.io/en/latest/cookbook/#recipe-collapsible-sections-visible-invisible-elements
@@ -106,7 +106,7 @@ class UnsungHero:
 
 
     @classmethod
-    def update_totaly(cls, database):
+    def update_totaly(cls, database: list):
         """
         update_totaly calculates the current sales from "database" list.
         Used as: window[key].update(f"¥{update_totaly(database)}")
@@ -126,7 +126,7 @@ class UnsungHero:
 
     
     @classmethod
-    def calc_subtotal(cls, database, history):
+    def calc_subtotal(cls, database: list, history: list):
         """
         calc_subtotal calculates the temporary sales from "database" and "history" list.
         Used as: window[key].update(f"¥{update_totaly(database, history)}")
@@ -149,7 +149,7 @@ class UnsungHero:
 
 
     @classmethod
-    def save_profile(cls, database, reference=False, **kwargs):
+    def save_profile(cls, database: list, reference=False):
         
         path = f"{UnsungHero.parent_dir('log')}"
         if not os.path.exists(path):
@@ -170,24 +170,14 @@ class UnsungHero:
 
 
     @classmethod
-    def print_anything(cls, *args):
-        """
-        print_anything prints variables given in the argument one by one.
-
-        Args:
-            *args any:
-                Any types of variables
-
-        Returns:
-
-        """
-        for x in args:
-            print (x)
-
-
-    @classmethod
     def clean_logs(cls):
         target = f"{UnsungHero.parent_dir('log')}"
+        shutil.rmtree(target)
+        os.mkdir(target)
+
+    @classmethod
+    def clean_reports(cls):
+        target = f"{UnsungHero.parent_dir('report')}"
         shutil.rmtree(target)
         os.mkdir(target)
 
