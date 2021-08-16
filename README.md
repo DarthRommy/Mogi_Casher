@@ -1,14 +1,11 @@
 # MogiCasher
-![Current version](https://img.shields.io/badge/MogiCasher-1.5.2-red)
+![Current version](https://img.shields.io/badge/MogiCasher-1.5.1-red)
 ![Python version](https://img.shields.io/badge/Python-3.9.6-blue)
 ![PySimpleGUI version](https://img.shields.io/badge/PySimpleGUI-4.45.0-orange)
 ![pandas version](https://img.shields.io/badge/pandas-1.3.1-green)
 
-Readmeにようこそ！  
-引継ぎでガチャガチャしそうなのでGitHubに上げてしまいました。  
-来年の担当者はクローンして勝手に変えちゃっていいよ（もし使うなら）
-
-使い方の更新は本体のアプデよりかなり遅いことをご了承ください。
+Readmeにようこそ！
+使い方の画像の更新は本体のアプデよりかなり遅いことをご了承ください。
 
 **いろんなことが適当に書いてあります！！！**
 
@@ -121,7 +118,7 @@ CSVファイルとリストを使用する(コアの部分は)シンプルなソ
 - [ ] バーコード画像の生成機能はない...
 
 ### 動作環境
-Python3のソフトです。動作には以下の外部ライブラリが必要です。*[アプリケーション化]*(/README.md#補足)  
+Python3のソフトです。動作には以下の外部ライブラリが必要です。-> *[アプリケーション化](/README.md#補足)*  
 - [pandas](https://pandas.pydata.org/)
 - [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/)
 
@@ -267,18 +264,13 @@ Pythonかじってる人向け
 
 ### レイアウト変更
 MogiCasherはPySimpleGUIを使用してます。  
-レイアウトは[interface.py](/mogicasher/interface/interface.py)に全部書いてあります。
-記述方法は[PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/call%20reference/)に従ってください。  
-また、引数が多くて見にくくなるものは[style.py](/mogicasher/interface/casher.py)のように別で辞書型宣言することもできます。
+レイアウトの記述方法は[PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/call%20reference/)に従ってください。  
+また、引数が多くて見にくくなるものは[style.py](/mogicasher/interface/style.py)のように別で辞書型宣言することもできます。
 
 ### アプリケーション化
 [mogicasher.py](/mogicasher/mogicasher.py)を指定してください。  
 作者は設定ファイルを書くのがめんどくさいので[pysintaller](https://www.pyinstaller.org/)を使ってます。  
 ※起動は結構重たいです。pyinstallerのせいかPySimpleGUIのせいかは知らんけど
-
-### Input欄
-Homeタブ以外を選択している間はInput欄は無効になるようにしてあります。 
-バーコードを読み取れるのはHomeタブを開いてる間だけやで 
 
 ### 複数データの同時使用  
 オートセーブしたデータを読み込む関数がこちら。 (一部改変)
