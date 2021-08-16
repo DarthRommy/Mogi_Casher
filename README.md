@@ -269,32 +269,32 @@ window["-SUBTOTAL-"].update("¥{}".format(calc_subtotal(database, history)))
 Pythonかじってる人向け
 
 ### 各ファイルの説明
-#### interface.py
+- interface.py
 ウィンドウのレイアウトを書いた場所。  
 class: Interface  
 Location: [interface.py](/mogicasher/interface/interface.py)
 
-#### style.py
+- style.py
 ウィンドウのレイアウトのうち、引数が多くなるものについて辞書型でまとめた。  
 class: None  
 Location: [style.py](/mogicasher/interface/style.py)
 
-#### handler.py
+- handler.py
 ウィンドウ上のイベントを受け取り、それに応じて関数を実行する。  
 class: Handler  
 Location: [handler.py](/mogicasher/performer/handler.py)
 
-#### performer.py
+- performer.py
 イベントに応じてhandlerに呼び出される関数を書いた場所。  
 class: Performer  
 Location: [performer.py](/mogicasher/performer/performer.py)
 
-#### unsunghero.py
+- unsunghero.py
 ウィンドウに直接影響しない(=Interfaceのインスタンスを使わない)関数をまとめた場所。  
 class: UnsungHero  
 Location: [unsunghero.py](/mogicasher/performer/unsunghero.py)
 
-#### mogicasher.py
+- mogicasher.py
 ウィンドウの起動から終了までの全ての処理をまとめる場所。  
 class: MogiCasher  
 Location: [mogicasher.py](/mogicasher/mogicasher.py)
