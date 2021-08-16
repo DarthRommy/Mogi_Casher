@@ -5,128 +5,24 @@
 ![pandas version](https://img.shields.io/badge/pandas-1.3.1-green)
 
 Readmeにようこそ！
+使い方の画像の更新は本体のアプデよりかなり遅いことをご了承ください。
 
 **いろんなことが適当に書いてあります！！！**
 
 ## 目次
+1. [使い方](/README.md#使い方)
+   - [基本操作](/README.md#基本操作)
+   - [Analyze](/README.md#Analyze)
+   - [Setting](/README.md#Setting)
 1. [概要](/README.md#概要)
-   - [機能](/README.md#機能)
    - [動作環境](/README.md#動作環境)
    - [CSVファイルの形式](/README.md#CSVファイルの形式)
    - [対応コード](/README.md#対応コード)
    - [ファイル構成](/README.md#ファイル構成)
-1. [使い方](/README.md#使い方)
-   - [基本操作](/README.md#基本操作)
-     - [下準備](/README.md#下準備)
-     - [起動](/README.md#起動)
-     - [コードデータを読み込む](/README.md#コードデータを読み込む)
-     - [コードを読み取る](/README.md#コードを読み取る)
-     - [精算する](/README.md#精算する)
-     - [ソフトを終了する](/README.md#ソフトを終了する)
-   - [その他](/README.md#その他)
-     - [Analyze](/README.md#Analyze)
-     - [Setting](/README.md#Setting)
-1. [注意事項](/README.md#注意事項)
 1. [解説](/README.md#解説)
    - [リスト](/README.md#リスト)
    - [バーコード読み取り時](README.md#バーコード読み取り時)
-
-## 概要
-CSVファイルとリストを使用する(コアの部分は)シンプルなソフトです。  
-システムの参考 -> [LC_Manager](https://github.com/parsely1231/LC_Manager)
-
-### 機能
-- 概ねレジとして機能するソフトです。
-- 各品目のコード、値段、売上個数が書かれたCSVファイルを読み込みます。
-- CSVデータをもとにした一覧表と現在の売り上げを表示します。
-- 終了時にその時点での売り上げデータをオートセーブします。
-- オートセーブしたデータがあれば次回読み込んだ状態で起動します。
-- 日本語でいい感じのフォントがないので仕方なく英語にしました。
-
-### 動作環境
-Python3のソフトです。  
-以下の外部ライブラリがインストールされているコンピューターで動作します。(はず)
-- ライブラリ
-  - datetime
-  - glob
-  - os
-  - subprocess
-  - [pandas](https://pandas.pydata.org/)
-  - [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/)
-  - webbrowser
-
-- **アプリケーション化した場合**
-1.5.1をexe化すると画像が読み込めないエラーが発生します。次のアプデをお楽しみに
-  - ~~mogicasher.pyをアプリケーション化してください。~~
-  - pyinstallerを使用してexe化した場合、Windows10では動作します。
-  - セキュリティソフトの設定によってはブロックされる場合があります。
-  - 8以前のWindowsやMacOSではよくわかりません。
-
-### CSVファイルの形式
-- UI的には5品目を想定していますが、**何品目でも対応可能です。**
-- 名前は *profile.csv* にしてください。ただし前後には何を入れてもOKです。 ex.) profile_0806.csv
-- ~~CSVのカラムは、コードの列を除き指定はありません。コードの列のみ"***CODE***"にしてください。~~　　
-- CSVのカラムはどの列も指定はありません。
-- また、下では1列目が#~の連番ですが、仕様上**どんな文字列にしても問題ありません。**
-  - ※英語フォントなのでアルファベット以外は表示がダサくなります。
-
-| (tag) | CODE | PRICE | UNITS |
-| --: | -------------: | ---: | ---: |
-| #1 | xxxxxxxx | xxx | 0 |
-| #2 | xxxxxxxx | xxx | 0 |
-| ... | ... | ... | ... |
-| #5 | xxxxxxxx | xxx | 0 |
-
-### 対応コード
-
-EAN(JAN)8桁を想定していますが、バーコードリーダーが読み取れる形式すべてに対応しています。
-
-### ファイル構成
-このソフトのファイル構成です。
-DLする際はmogicasherディレクトリごとDLするのがお勧めです。
-
-    dist
-    ┗ mogicasher
-      ┗ interface
-        ┗ __init__,py
-        ┗ interface.py
-        ┗ style.py
-
-      ┗ performer
-        ┗ __init__.py
-        ┗ handler.py
-        ┗ performer.py
-        ┗ unsunghero.py
-
-      ┗ system
-        ┗ fonts
-          ┗ ...
-        ┗ images
-          ┗ ...
-        ┗ log
-          ┗ ...
-        ┗ report
-          ┗ ...
-
-      ┗ mogicasher.py
-
-または※
-
-    dist
-    ┗ casher
-      ┗ system
-        ┗ fonts
-          ┗ ...
-        ┗ images
-          ┗ ...
-        ┗ log
-          ┗ ...
-        ┗ report
-          ┗ ...
-
-      ┗ mogicasher.exe
-
-※casher.pyをexe化した場合の構成
+1. [補足](/README.md#補足)
 
 ## 使い方
 ### 基本操作
@@ -134,7 +30,7 @@ DLする際はmogicasherディレクトリごとDLするのがお勧めです。
 コンビニと同じように、**一人来る→バーコード通す→お会計**のノリっていえば分かりやすいかな？
 
 #### 下準備
-[CSVファイルの形式](/README.md#CSVファイルの形式)に記述した形式のCSVファイルを用意しよう。
+[CSVファイルの形式](/README.md#CSVファイルの形式)に沿ったCSVファイルを用意しよう。ExcelかSpreadsheetで作るのがいいね
 
 #### 起動
 casher.pyを実行するとGUIが立ち上がります。(exe化した場合はexeファイルをクリック)  
@@ -198,11 +94,6 @@ Load ModeでCSVを読み込む
   - 今流行りのダークモードを実装してみた。
   - チェックを入れて再起動するとダークモードになる。
   - ダークモードの状態でチェックを外して再起動するとライトモードに戻る。
-- Custom Color
-  - GUIのテーマを好きなように選べるようにしてみた。
-  - チェックを入れて、どれか選んだ状態で再起動するとテーマが反映される。
-  - チェックを外すと選んだテーマは反映されない。
-  - ちなみにダークモードをオンにして再起動すると、テーマを選んでいてもダークモードになる。
 - Custom Font
   - SanFranciscoっていう普通PCに入ってないフォントで作ったので、インストールできるようにした。
   - subprocessでフォントを開いてユーザーにインストールさせる。システムフォルダにコピーするコードなんか書くとウイルス判定食らうからね
@@ -214,17 +105,97 @@ Load ModeでCSVを読み込む
   - [このGitHubリンク](/)を開く。
   - せっかくなのでソフトを配ったみんなに見てもらえるようにした。
 
-## 注意事項
-- 複数データの同時使用  
-このソフトは、同時に一つのバーコードデータが使われることを想定しています。  
-コードや値段が異なるCSVファイルを混ぜて使うとlogフォルダが荒れるので、自動読み込み機能が正しく機能しなくなります。  
-別のデータに切り替えたい場合は、Setting画面の"Clear Logs"ボタンをクリックしてlogフォルダ内をリセットしてください。
+## 概要
+CSVファイルとリストを使用する(コアの部分は)シンプルなソフトです。  
+システムの参考 -> [LC_Manager](https://github.com/parsely1231/LC_Manager)
+- [x] リストがかさばらないので動作が早い！
+- [x] 会計機能がついてる！
+- [x] ぱっと見で売り上げが分かる！
+- [x] 終了するときにオートセーブしてくれる！
+- [x] 次の起動時にオートセーブしたデータを読み込んでくれる！
+- [ ] 日本語でいい感じのフォントがなかったから仕方なく英語UI&英語フォントに...
+- [ ] オフラインソフトだから模擬店間のリアルタイムなデータ同期はできない...
+- [ ] バーコード画像の生成機能はない...
+
+### 動作環境
+Python3のソフトです。動作には以下の外部ライブラリが必要です。*[アプリケーション化]*(/README.md#補足)  
+- [pandas](https://pandas.pydata.org/)
+- [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/)
+
+### CSVファイルの形式
+- UI的には5品目を想定していますが、**何品目でも対応できます。**
+- ~~名前は *profile.csv* にしてください。ただし前後には何を入れてもOKです。 ex.) profile_0806.csv~~
+- ~~CSVのカラムは、コードの列を除き指定はありません。コードの列のみ"***CODE***"にしてください。~~
+- 最初に読み込むCSVのファイル名はなんでもええで
+- CSVのカラムはどの列も指定はありません。
+- また、下では1列目が#~の連番ですが、仕様上**どんな文字列にしても問題ありません。**
+  - ※英語フォントなのでアルファベット以外は表示がダサくなります。
+
+| (tag) | CODE | PRICE | UNITS |
+| --: | -------------: | ---: | ---: |
+| #1 | xxxxxxxx | xxx | 0 |
+| #2 | xxxxxxxx | xxx | 0 |
+| ... | ... | ... | ... |
+| #5 | xxxxxxxx | xxx | 0 |
+
+### 対応コード
+
+EAN(JAN)8桁を想定していますが、バーコードリーダーが読み取れる形式すべてに対応しています。
+
+### ファイル構成
+このソフトのファイル構成です。
+mogicasherフォルダの名前は変えてもOKです。
+
+    dist
+    ┗ mogicasher
+      ┗ interface
+        ┗ __init__,py
+        ┗ interface.py
+        ┗ style.py
+
+      ┗ performer
+        ┗ __init__.py
+        ┗ handler.py
+        ┗ performer.py
+        ┗ unsunghero.py
+
+      ┗ system
+        ┗ fonts
+          ┗ ...
+        ┗ images
+          ┗ ...
+        ┗ log
+          ┗ ...
+        ┗ report
+          ┗ ...
+
+      ┗ mogicasher.py
+
+または※
+
+    dist
+    ┗ mogicasher
+      ┗ system
+        ┗ fonts
+          ┗ ...
+        ┗ images
+          ┗ ...
+        ┗ log
+          ┗ ...
+        ┗ report
+          ┗ ...
+
+      ┗ mogicasher.exe
+
+※casher.pyをexe化した場合の構成
+
 ## 解説
-プログラム的に説明します。
+基本のシステムだけ説明しときます。
+
 ### リスト
 このソフトは以下のリストを使います。  
 全ての処理はこのリストに基づきます。  
-ちなみにこれらに合計金額は含まれず、関数を使って合計金額を計算し**表示する**仕組みです。
+ちなみにこれらに合計金額は含まれず、関数を使っていちいち合計金額を計算し表示する仕組みです。
 ```
 # 読み込んだCSVデータを変換したリスト
 # 確定した売り上げの計算に使う。
@@ -243,8 +214,8 @@ history = ["xxxxxxxx", "xxxxxxxx", ...]
 ![subtotal](https://user-images.githubusercontent.com/88261399/128665494-fa5a3d79-2bb4-4010-9957-828dd2c0313b.png)  
 以下のコードで登録されたバーコード以外をブロックします。
 ```
-input = 入力値
-window = PySimpleGUIのオブジェクト
+input: 入力値
+window: PySimpleGUIのWindowオブジェクト
 
 # databaseの"CODE"列からコードの一覧を作る
 codes = [database[x][1] for x in range(len(database))]
@@ -266,13 +237,13 @@ except ValueError:
    pass
 ```
 また、精算機能に対応するため支払金額を表示する必要があります。  
-なおこのプログラムは入力があるたびに、↑のtry節の続きに実行されます。
+以下のプログラムは入力があるたびに、↑のtry節の続きに実行されます。
 ```
 ...
 history.append(input)
 
 def calc_subtotal(database, history):
-   # databaseを使って品目ごとにhistory内のコードの数を数え、それぞれ値段を掛ける。
+   # databaseを使ってコードごとのhistory内の数を数え、それぞれ値段を掛ける。
    # つまり品目ごとの売り上げが出るので、それをsubtotalに足していく。
    
    # 一時データの売り上げを格納する変数
@@ -287,3 +258,44 @@ def calc_subtotal(database, history):
 # "Subtotal"テキストを更新する
 window["-SUBTOTAL-"].update("¥{}".format(calc_subtotal(database, history)))
 ```
+
+## 補足
+Pythonかじってる人向け
+
+### レイアウト変更
+MogiCasherはPySimpleGUIを使用してます。  
+レイアウトの記述方法は[PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/call%20reference/)に従ってください。  
+また、引数が多くて見にくくなるものは[style.py](/mogicasher/interface/casher.py)のように別で辞書型宣言することもできます。
+
+### アプリケーション化
+[mogicasher.py](/mogicasher/mogicasher.py)を指定してください。  
+作者は設定ファイルを書くのがめんどくさいので[pysintaller](https://www.pyinstaller.org/)を使ってます。  
+※起動は結構重たいです。pyinstallerのせいかPySimpleGUIのせいかは知らんけど
+
+### 複数データの同時使用  
+オートセーブしたデータを読み込む関数がこちら。 (一部改変)
+```
+def get_autosave():
+
+  # logフォルダ内のファイル一覧をゲットして作成日時で並べ替える
+  path = f"{(os.getcwd()}/log/*.csv"
+  files = glob.glob(path)
+  files.sort(reverse=True, key=lambda x: os.path.getctime(x))
+
+  # 完全にtry節にハマってしまった
+  try:
+      df = pd.read_csv(files[0], dtype={0: str, 1: str, 2: int, 3: int}, on_bad_lines="error")
+      def_database = df.values.tolist()
+
+      # 1行でも要素が4以外ならエラー判定
+      for x in def_database:
+          if len(x) > 4 or len(x) < 4:
+              raise ValueError()
+  
+  # エラーが出た場合デフォルトのリストになる
+  except (IndexError, ValueError):
+      def_database = [[f"#{x+1}", "xxxxxxxx", 0, 0] for x in range(5)]
+
+  return def_database
+```
+*os.path.getctime()* はファイルの作成日時を取得する関数。  
