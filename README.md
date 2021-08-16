@@ -1,5 +1,5 @@
 # MogiCasher
-![Current version](https://img.shields.io/badge/MogiCasher-1.5.1-red)
+![Current version](https://img.shields.io/badge/MogiCasher-1.5.2-red)
 ![Python version](https://img.shields.io/badge/Python-3.9.6-blue)
 ![PySimpleGUI version](https://img.shields.io/badge/PySimpleGUI-4.45.0-orange)
 ![pandas version](https://img.shields.io/badge/pandas-1.3.1-green)
