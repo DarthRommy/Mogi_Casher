@@ -270,7 +270,7 @@ Pythonかじってる人向け
 
 ### 各ファイルの説明
 #### interface.py
-ウィンドウのレイアウトを書いた場所。 
+ウィンドウのレイアウトを書いた場所。  
 class: Interface  
 Location: [interface.py](/mogicasher/interface/interface.py)
 
@@ -280,17 +280,17 @@ class: None
 Location: [style.py](/mogicasher/interface/style.py)
 
 #### handler.py
-ウィンドウ上のイベントを受け取り、それに応じて関数を実行する。
+ウィンドウ上のイベントを受け取り、それに応じて関数を実行する。  
 class: Handler  
 Location: [handler.py](/mogicasher/performer/handler.py)
 
 #### performer.py
-イベントに応じてhandlerに呼び出される関数を書いた場所。
+イベントに応じてhandlerに呼び出される関数を書いた場所。  
 class: Performer  
 Location: [performer.py](/mogicasher/performer/performer.py)
 
 #### unsunghero.py
-ウィンドウに直接影響しない(=Interfaceのインスタンスを使わない)関数をまとめた場所。
+ウィンドウに直接影響しない(=Interfaceのインスタンスを使わない)関数をまとめた場所。  
 class: UnsungHero  
 Location: [unsunghero.py](/mogicasher/performer/unsunghero.py)
 
