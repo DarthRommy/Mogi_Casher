@@ -36,7 +36,6 @@ Readmeにようこそ！
 casher.pyを実行するとGUIが立ち上がります。(exe化した場合はexeファイルをクリック)  
 起動時の画面はこんな感じ。
 
-![home](https://user-images.githubusercontent.com/88261399/128629556-b5db2d87-7417-4985-9491-0903cca7b8aa.png)
 
 #### コードデータを読み込む
 ##### 初回起動時
@@ -45,7 +44,6 @@ Load ModeでCSVを読み込む
 "Load Mode"にチェックを入れるとLoad画面に切り替わります。  
 "Browse"ボタンをクリックするとファイル選択画面が表示されるので、用意したCSVファイルを選択して読み込んでください。
 
-![loadmode](https://user-images.githubusercontent.com/88261399/128630723-30b0cf32-d071-4e1d-8b42-2022dc6e51a4.png)
 
 ##### 続きから始める
 このソフトには、終了時に自動でデータを保存する機能がついています。  
@@ -53,32 +51,27 @@ Load ModeでCSVを読み込む
 ***
 読み込んだらLoad Modeが自動で解除されて、右側の表が更新されます。  
 
-![loaded](https://user-images.githubusercontent.com/88261399/128630715-6511ddd3-b2be-4919-b81e-5544dac7a97a.png)
 
 #### コードを読み取る
 バーコードリーダーを使ってコードを読み取ると、このような画面になります。  
 **データにないコードはスルーされます。** Enter空打ちや数字以外も同じです。  
 ⚠️ *実際のレジでいえば精算前の状態です。まだ売り上げとして確定していません。*
 
-![input](https://user-images.githubusercontent.com/88261399/128632132-aad711ff-e80d-4369-99fc-bf38f5b4cc2e.png)
 
 #### 精算する
 バーコードをひと通り通し終わったら、"Check Out"ボタンをクリックしてください。  
 ボタンを押すまでに読み取ったコードが全て処理されます。
 **この時点で初めて売り上げにカウントされます。**
 
-![checkout](https://user-images.githubusercontent.com/88261399/128632357-39664c29-4c73-4c20-b9d9-e1d68d0789e7.gif)
 ***
 "Cancel"ボタンをクリックすると、未確定の売り上げがリセットされます。  
 読み取りを間違えたときに使ってね。
 
-![cancel](https://user-images.githubusercontent.com/88261399/128704622-f4b6fb7e-e069-4624-bf37-7643be90d84e.gif)
 
 #### ソフトを終了する
 "Exit"ボタンあるいは電源のアイコンをクリックしてください。  
 終了時にその時点での売り上げデータが勝手にCSVで保存されます。
 
-![exit](https://user-images.githubusercontent.com/88261399/128704680-5c37e31e-7354-4f62-8b0a-7fd453c1dba8.gif)
 
 ### Analyze
 
@@ -204,7 +197,6 @@ history = ["xxxxxxxx", "xxxxxxxx", ...]
 
 具体例で説明してみましょう。  
 画面のこの部分が変わります。  
-![subtotal](https://user-images.githubusercontent.com/88261399/128665494-fa5a3d79-2bb4-4010-9957-828dd2c0313b.png)  
 以下のコードで登録されたバーコード以外をブロックします。
 ```
 input: 入力値
