@@ -39,35 +39,35 @@ class Performer:
         
         #Exitボタンならここで離脱
         if event == 'exit':
-            return database, history, listbox_list
+            return database, history
         
         #Exitボタン以外の時にタブを切り替える
         for x in tab_list[:3]:
             self.window[x.upper()].update(visible=True if x == event else False)
         
-        return database, history, listbox_list
+        return database, history
 
         
-    def handle_input(self, values, database, history, listbox_list, **kwargs):
+    def handle_input(self, values, database, history, **kwargs):
         
-        input = values["-INPUT-"]
+        code = values["-INPUT-"]
         
         self.window['-INPUT-'].update('')
-        codes = [database[x][1] for x in range(len(database))]
+        codes = [x[1] for x in database]
 
         # "Load"前で初期値をブロック
-        if input == "xxxxxxxx":
-            return database, history, listbox_list
+        if code == "xxxxxxxx":
+            return database, history
 
         try:
             # inputがcodesに含まれない場合↓でエラーを吐く
-            tag = database[codes.index(input)][0]
-            price = database[codes.index(input)][2]
+            tag = database[codes.index(code)][0]
+            price = database[codes.index(code)][2]
 
-            history.append(input)
+            history.append(code)
 
             # GUI更新
-            self.window["-RECENT-"].update(f">{tag} {input} ¥{price}")
+            self.window["-RECENT-"].update(f">{tag} {code} ¥{price}")
             self.window["-SUBTOTAL-"].update(f"¥{UnsungHero.calc_subtotal(database, history)}")
             self.window["-PAY-"].update(disabled=False)
             self.window["-CANCEL-"].update(disabled=False)
@@ -77,10 +77,10 @@ class Performer:
         except ValueError:
             self.window["-RECENT-"].update('>')
 
-        return database, history, listbox_list
+        return database, history
 
 
-    def load_profile(self, database, history, listbox_list, **kwargs):
+    def load_profile(self, database, history, **kwargs):
         try:
             data = sg.popup_get_file(message="", no_window=True, file_types=(("CSV Files", '*.csv'),))
             df = pd.read_csv(data, dtype={0: str, 1: str, 2: int, 3: int})
@@ -108,20 +108,20 @@ class Performer:
         except FileNotFoundError:
             self.window["-RECENT-"].update(">Canceled")                  #キャンセルしたとき
 
-        return database, history, listbox_list
+        return database, history
     
 
-    def cancel_checkout(self, database, history, listbox_list, **kwargs):
+    def cancel_checkout(self, database, history, **kwargs):
         history.clear()
         self.window["-SUBTOTAL-"].update("¥0")
         self.window["-PAY-"].update(disabled=True)
         self.window["-CANCEL-"].update(disabled=True)
         self.window["-RECENT-"].update(">Canceled")
 
-        return database, history, listbox_list
+        return database, history
 
 
-    def checkout(self, database, history, listbox_list, **kwargs):
+    def checkout(self, database, history, **kwargs):
         for x in database:
             x[3] += history.count(x[1])
         history.clear()
@@ -133,7 +133,7 @@ class Performer:
         self.window["-PAY-"].update(disabled=True)
         self.window["-CANCEL-"].update(disabled=True)
 
-        return database, history, listbox_list
+        return database, history
 
     
     def refresh_analyze(self, database, history, listbox_list, **kwargs):
@@ -164,7 +164,7 @@ class Performer:
         self.window["-ANLIST-"].update(set_to_index = 0)
         self.window["-ANTABLE-"].update(overall_list)
 
-        return database, history, listbox_list
+        return database, history
 
 
     def switch_analyze(self, database, history, values, listbox_list, **kwargs):
@@ -186,4 +186,4 @@ class Performer:
 
             self.window["-ANTABLE-"].update(table_list)
 
-        return database, history, listbox_list
+        return database, history

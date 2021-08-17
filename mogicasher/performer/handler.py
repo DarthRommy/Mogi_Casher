@@ -26,12 +26,12 @@ class Handler:
     def handle(self, event, values, tab_list, database, history, listbox_list):
         if callable(event):
             event()
-            return database, history, listbox_list
+            return database, history
 
-        elif event not in self.functions:
-            return database, history, listbox_list
+        elif event not in self.functions or event is None:
+            return database, history
         
         event_func = self.functions[event]
-        database, history, listbox_list = event_func(**{"event":event, "values":values, "tab_list":tab_list, "database": database, "history":history, "listbox_list": listbox_list})
+        database, history = event_func(**{"event":event, "values":values, "tab_list":tab_list, "database": database, "history":history, "listbox_list": listbox_list})
         
-        return database, history, listbox_list
+        return database, history

@@ -40,7 +40,7 @@ class MogiCasher:
 
     @classmethod
     def control(cls, color, database, version, darkmode=False):
-
+        
         interface = Interface(color, database, version, darkmode)
         updater = Performer(window=interface.window)
         handler = Handler(updater)
@@ -61,7 +61,7 @@ class MogiCasher:
             except AttributeError:
                 pass
 
-            database, history, listbox_list = handler.handle(event, values, tab_list, database, history, listbox_list)
+            database, history = handler.handle(event, values, tab_list, database, history, listbox_list)
 
             darkmode = values["-DARK-"]
 

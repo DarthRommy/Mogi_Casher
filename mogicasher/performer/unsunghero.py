@@ -119,10 +119,10 @@ class UnsungHero:
             int:
                 Will be displayed in the window.
         """
-        totaly = 0
+        total = 0
         for x in database:
-            totaly += int(x[2])*int(x[3])
-        return totaly
+            total += x[2]*x[3]
+        return total
 
     
     @classmethod
