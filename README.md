@@ -288,7 +288,7 @@ def handle_input(values, database):
 変数tagの `codes.index(code)` の部分で、`code`が`codes`に含まれない場合は例外処理でスルーする。(ValueError)  
 まあつまりブロック装置はウィンドウありきってことですね
 
-## 売り上げ登録
+### 売り上げ登録
 Chekcoutボタンを押すと、初めて`database`に売上個数が追加されます。 -> [checkout](/mogicasher/performer/performer.py#L124)
 ```
 def checkout(database, history):
@@ -299,7 +299,7 @@ def checkout(database, history):
 各コードごとに`history`内に何個あるか数えて、その個数をもとの個数に足す。  
 終わったら`history`はリセットしてしまいましょう。
 
-## 売り上げ計算
+### 売り上げ計算
 売り上げ計算も簡単。
 ```
 def update_totaly(database):
