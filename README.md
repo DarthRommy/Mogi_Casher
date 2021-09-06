@@ -103,7 +103,7 @@ DarkmodeとCustom Fontの反映にはRestartボタンで再起動が必要です
   - せっかくなのでソフトを配ったみんなに見てもらえるようにした。
 
 # 詳しく
-CSVファイルとリストを使用する(コアの部分は)[シンプル](/README.md#補足)なソフトです。  
+CSVファイルとリストを使用する(コアの部分は)シンプルなソフトです。  
 システムの参考 -> [LC_Manager](https://github.com/parsely1231/LC_Manager)
 - [x] リストがかさばらないので動作が早い！
 - [x] 会計機能がついてる！
@@ -184,12 +184,11 @@ dist
 ```
 ※casher.pyをexe化した場合の構成
 
-各スクリプトファイルについては[こちら]
 ### 各ファイルの説明
 - [interface.py](/mogicasher/interface/interface.py)  
 ウィンドウのレイアウトを書いた場所。
 
-- [style.py](/mogicasher/interface/style.py)
+- [style.py](/mogicasher/interface/style.py)  
 ウィンドウのレイアウトのうち、引数が多くなるものについて辞書型でまとめた。
 
 - [handler.py](/mogicasher/performer/handler.py)  
