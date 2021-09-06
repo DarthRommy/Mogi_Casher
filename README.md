@@ -102,7 +102,7 @@ DarkmodeとCustom Fontの反映にはRestartボタンで再起動が必要です
   - [このGitHubリンク](/)を開く。
   - せっかくなのでソフトを配ったみんなに見てもらえるようにした。
 
-# 概要
+# 詳しく
 CSVファイルとリストを使用する(コアの部分は)[シンプル](/README.md#補足)なソフトです。  
 システムの参考 -> [LC_Manager](https://github.com/parsely1231/LC_Manager)
 - [x] リストがかさばらないので動作が早い！
@@ -115,7 +115,7 @@ CSVファイルとリストを使用する(コアの部分は)[シンプル](/RE
 - [ ] バーコード画像の生成機能はつけてない
 
 ## 動作環境
-Python3のソフトです。動作には以下の外部ライブラリが必要です。-> *[アプリケーション化](/README.md#補足)*  
+Python3のソフトです。動作には以下の外部ライブラリが必要です。  
 - [pandas](https://pandas.pydata.org/)
 - [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/)
 
@@ -140,7 +140,6 @@ Python3のソフトです。動作には以下の外部ライブラリが必要�
 ## ファイル構成
 このソフトのファイル構成です。  
 mogicasherフォルダの場所や名前は変えてもOK。**中身はダメ**  
-各スクリプトファイルについては[補足](/README.md#補足)
 ```
 dist
 ┗ mogicasher
@@ -185,6 +184,7 @@ dist
 ```
 ※casher.pyをexe化した場合の構成
 
+各スクリプトファイルについては[こちら]
 ### 各ファイルの説明
 - [interface.py](/mogicasher/interface/interface.py)  
 ウィンドウのレイアウトを書いた場所。
