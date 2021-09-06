@@ -14,15 +14,9 @@ Readmeにようこそ！
 
 # 目次
 1. [使い方](/README.md#使い方)
-   - [基本操作](/README.md#基本操作)
-   - [Analyze](/README.md#Analyze)
-   - [Setting](/README.md#Setting)
-1. [概要](/README.md#概要)
-   - [動作環境](/README.md#動作環境)
-   - [CSVファイルの形式](/README.md#CSVファイルの形式)
-   - [対応コード](/README.md#対応コード)
-   - [ファイル構成](/README.md#ファイル構成)
-1. [補足](/README.md#補足)
+   - ざっくり使い方を説明してみた。説明書代わりに使ってね
+1. [詳しく](/README.md#詳しく)
+   - 2021年の模擬の集計システムも含めてこのソフトを解説してみた。
 
 # 使い方
 ## 基本操作
@@ -31,9 +25,11 @@ Readmeにようこそ！
 
 ### 下準備
 [CSVファイルの形式](/README.md#CSVファイルの形式)に沿ったCSVファイルを用意しよう。ExcelかSpreadsheetで作るのがいいね
+※実際配って使うときはフォルダ内に一緒に入れてある
 
 ### 起動
-casher.pyを実行するとGUIが立ち上がります。(exe化した場合はexeファイルをクリック)  
+mogicasher.exe(mogicasher.py)を実行するとGUIが立ち上がります。  
+多分警告とかなくすんなり起動できると思う。  
 起動時の画面はこんな感じ。
 
 
@@ -84,6 +80,10 @@ reportフォルダ内にあるファイルそれぞれの名前と合計金額�
 ## Setting
 設定画面が作れるような複雑なソフトじゃないけど無理やり作った。  
 DarkmodeとCustom Fontの反映にはRestartボタンで再起動が必要です。
+- 入力欄
+  - 保存データの識別用に発団名を設定できるようにしてみた。
+  - Submitボタンを押すと入力欄に打ち込んだ文字が登録される。
+  - 再起動すると左上のタイトルが発団名になるぜ
 - Darkmode
   - 今流行りのダークモードを実装してみた。
   - チェックを入れて再起動するとダークモードになる。
@@ -110,9 +110,9 @@ CSVファイルとリストを使用する(コアの部分は)[シンプル](/RE
 - [x] ぱっと見で売り上げが分かる！
 - [x] 終了するときにオートセーブしてくれる！
 - [x] 次の起動時にオートセーブしたデータを読み込んでくれる！
-- [ ] 日本語でいい感じのフォントがなかったから仕方なく英語UI&英語フォントに...
-- [ ] オフラインソフトだから模擬店間のリアルタイムなデータ同期はできない...
-- [ ] バーコード画像の生成機能はない...
+- [ ] 日本語でいい感じのフォントがなかったから仕方なく英語UI&英語フォント
+- [ ] オフラインソフトだから模擬店間のリアルタイムなデータ同期はできない
+- [ ] バーコード画像の生成機能はつけてない
 
 ## 動作環境
 Python3のソフトです。動作には以下の外部ライブラリが必要です。-> *[アプリケーション化](/README.md#補足)*  
@@ -140,96 +140,70 @@ Python3のソフトです。動作には以下の外部ライブラリが必要�
 
 ## ファイル構成
 このソフトのファイル構成です。  
-mogicasherフォルダの名前は変えてもOK。  
-**ただし、interfaceフォルダーとperformerフォルダーはモジュール化しているので、名前変更やディレクトリ変更は不可**  
+mogicasherフォルダの場所や名前は変えてもOK。**中身はダメ**  
 各スクリプトファイルについては[補足](/README.md#補足)
+```
+dist
+┗ mogicasher
+  ┗ interface
+    ┗ __init__.py
+    ┗ interface.py
+    ┗ style.py
 
-    dist
-    ┗ mogicasher
-      ┗ interface
-        ┗ __init__,py
-        ┗ interface.py
-        ┗ style.py
+  ┗ performer
+    ┗ __init__.py
+    ┗ handler.py
+    ┗ performer.py
+    ┗ unsunghero.py
 
-      ┗ performer
-        ┗ __init__.py
-        ┗ handler.py
-        ┗ performer.py
-        ┗ unsunghero.py
+  ┗ system
+    ┗ fonts
+      ┗ ...
+    ┗ images
+      ┗ ...
+    ┗ log
+      ┗ ...
+    ┗ report
+      ┗ ...
 
-      ┗ system
-        ┗ fonts
-          ┗ ...
-        ┗ images
-          ┗ ...
-        ┗ log
-          ┗ ...
-        ┗ report
-          ┗ ...
-
-      ┗ mogicasher.py
-
+  ┗ mogicasher.py
+```
 または※
+```
+dist
+┗ mogicasher
+  ┗ system
+    ┗ fonts
+      ┗ ...
+    ┗ images
+      ┗ ...
+    ┗ log
+      ┗ ...
+    ┗ report
+      ┗ ...
 
-    dist
-    ┗ mogicasher
-      ┗ system
-        ┗ fonts
-          ┗ ...
-        ┗ images
-          ┗ ...
-        ┗ log
-          ┗ ...
-        ┗ report
-          ┗ ...
-
-      ┗ mogicasher.exe
-
+  ┗ mogicasher.exe
+```
 ※casher.pyをexe化した場合の構成
 
-# 補足
-Pythonかじってる人向け
+### 各ファイルの説明
+- [interface.py](/mogicasher/interface/interface.py)  
+ウィンドウのレイアウトを書いた場所。
 
-## 各ファイルの説明
-- interface.py  
-ウィンドウのレイアウトを書いた場所。  
-class: Interface  
-Location: [interface.py](/mogicasher/interface/interface.py)
+- [style.py](/mogicasher/interface/style.py)
+ウィンドウのレイアウトのうち、引数が多くなるものについて辞書型でまとめた。
 
-- style.py  
-ウィンドウのレイアウトのうち、引数が多くなるものについて辞書型でまとめた。  
-class: None  
-Location: [style.py](/mogicasher/interface/style.py)
+- [handler.py](/mogicasher/performer/handler.py)  
+ウィンドウ上のイベントを受け取り、それに応じて関数を実行する。
 
-- handler.py  
-ウィンドウ上のイベントを受け取り、それに応じて関数を実行する。  
-class: Handler  
-Location: [handler.py](/mogicasher/performer/handler.py)
+- [performer.py](/mogicasher/performer/performer.py)  
+イベントに応じてhandlerに呼び出される関数を書いた場所。
 
-- performer.py  
-イベントに応じてhandlerに呼び出される関数を書いた場所。  
-class: Performer  
-Location: [performer.py](/mogicasher/performer/performer.py)
+- [unsunghero.py](/mogicasher/performer/unsunghero.py)  
+ウィンドウに直接影響しない(=Interfaceのインスタンスを使わない)関数をまとめた場所。
 
-- unsunghero.py  
-ウィンドウに直接影響しない(=Interfaceのインスタンスを使わない)関数をまとめた場所。  
-class: UnsungHero  
-Location: [unsunghero.py](/mogicasher/performer/unsunghero.py)
-
-- mogicasher.py  
-ウィンドウの起動から終了までの全ての処理をまとめる場所。  
-class: MogiCasher  
-Location: [mogicasher.py](/mogicasher/mogicasher.py)
-
-## レイアウト変更
-MogiCasherはPySimpleGUIを使用してます。  
-レイアウトの記述方法は[PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/call%20reference/)に従ってください。  
-また、引数が多くて見にくくなるものは[style.py](/mogicasher/interface/style.py)のように別で辞書型宣言することもできます。
-
-## アプリケーション化
-[mogicasher.py](/mogicasher/mogicasher.py)を指定してください。  
-作者は設定ファイルを書くのがめんどくさいので[pysintaller](https://www.pyinstaller.org/)を使ってます。  
-※起動は若干重たいです。pyinstallerのせいかPySimpleGUIのせいかは知らんけど
+- [mogicasher.py](/mogicasher/mogicasher.py)  
+ウィンドウの起動から終了までの全ての処理をまとめる場所。
 
 ## バーコードどうやって入れてんの？
 1. バーコードリーダーは読み取ったときにEnterを送信する
@@ -238,7 +212,7 @@ MogiCasherはPySimpleGUIを使用してます。
 1. PySimpleGUIのWindowオブジェクトには"return_keyboard_events"という引数がある  
 -> Trueにするとキーボード入力をイベントとして処理してくれる
 
-つまり、Enter="/r"イベントが発生したときにInput欄の値を判定するようにした
+つまり、Enter="/r"イベントが発生したときにInput欄の値を判定するようにしたってわけ
 
 ## シンプルなソフトとは
 シンプルとか言うといてなに6つもファイル分かれてんねん！と思ったやろ？  
@@ -246,7 +220,7 @@ MogiCasherはPySimpleGUIを使用してます。
 - レイアウトを切り替えられるようにしてみたり  
 Pythonでモダンなソフトを作るとか狂気の沙汰やろ -> [change_layout](/mogicasher/performer/performer.py#L20)
 - 流行りのダークモードを実装してみたり  
-ダークモードの反映のための再起動の機能を付けたせいで[余計な関数](/mogicasher/mogicasher.py#L15)が一つ増えてしまった
+ダークモードの反映のための再起動の機能を付けたせいで[余計な関数](/mogicasher/mogicasher.py#L15)が増えてしまった
 
 ### 方針
 それはともかく、細かいウィンドウの話を取っ払ったあとのシステムはめちゃくちゃシンプル。  
