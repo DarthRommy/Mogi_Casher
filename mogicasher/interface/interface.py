@@ -1,7 +1,6 @@
 #----------interface.py----------
 
 import PySimpleGUI as sg
-from PySimpleGUI.PySimpleGUI import VerticalSeparator
 
 from performer.performer import UnsungHero
 from interface.style import *
@@ -16,7 +15,7 @@ class Interface:
         #----------Database----------
         self.database = database
         self.history = []
-        self.dirname = UnsungHero.parent_dir("images")
+        self.dirname = UnsungHero.system_dir("images")
         
 
         #----------Theme------------
@@ -29,30 +28,25 @@ class Interface:
         #Tab Select Frame
 
         # 切り替えレイアウトのキー
-        self.tab_list = ["home", "analyze", "setting", "exit"]
+        self.tab_list = ["home", "setting", "exit"]
 
         self.select_home = sg.Column(pad=(0,0), layout=[
-            [sg.Image(f'{self.dirname}/home_bright.png', enable_events=True, k='home_image', tooltip="メイン画面"),
+            [sg.Image(f'{self.dirname}/home_bright.png', enable_events=True, k=f'{self.tab_list[0]}_image', tooltip="メイン画面"),
              sg.Text('Home', **selected_style, k=self.tab_list[0], tooltip="メイン画面")]])
         
-        self.select_analyze = sg.Column(pad=(0,0), layout=[
-            [sg.Image(f'{self.dirname}/analyze.png', enable_events=True, k='analyze_image', tooltip="各模擬店のデータを集計します"),
-             sg.Text('Analyze', **select_style, k=self.tab_list[1], tooltip="各店のデータを集計します")]])
-
         self.select_setting = sg.Column(pad=(0,0), layout=[
-            [sg.Image(f'{self.dirname}/setting.png', enable_events=True, k='setting_image', tooltip="マニアックな設定ができます"),
-             sg.Text('Setting', **select_style, k=self.tab_list[2], tooltip="マニアックな設定ができます")]])
+            [sg.Image(f'{self.dirname}/setting.png', enable_events=True, k=f'{self.tab_list[1]}_image', tooltip="マニアックな設定ができます"),
+             sg.Text('Setting', **select_style, k=self.tab_list[1], tooltip="マニアックな設定ができます")]])
 
         self.select_exit = sg.Column(pad=(0,(15,0)), layout=[
-            [sg.Image(f'{self.dirname}/exit.png', enable_events=True, k='exit_image', tooltip="待て!!!保存したか???"),
-             sg.Text('Exit', **select_style, k=self.tab_list[3], tooltip="")]])
+            [sg.Image(f'{self.dirname}/exit.png', enable_events=True, k=f'{self.tab_list[2]}_image'),
+             sg.Text('Exit', **select_style, k=self.tab_list[2])]])
 
         self.select_air_1 = sg.Column(pad=(5,30), layout=[[sg.Text(' ', font=('sf ui display bold', 12))]])
 
         self.select_frame = sg.Column(pad=(10,10), layout=[                      #空のレイアウトを使って力技で調整 
                 [self.select_air_1],
                 [self.select_home],
-                [self.select_analyze],
                 [self.select_setting],
                 [self.select_exit]
             ])
@@ -80,30 +74,6 @@ class Interface:
             [self.input_frame]
         ]
         
-        #Analyze Tab
-        self.listbox_list = ["Overall"]
-        self.antable_list = [["", ""]]
-
-        self.add_data_frame = sg.Frame("Add Data", font=("sf ui display bold",18), layout=[
-            [sg.Button("Browse", font=("sf ui display bold",11), k=UnsungHero.add_profile, tooltip="ファイルをコピー"),
-             sg.VerticalSeparator(),
-             sg.Text("▶▶▶", font=("sf ui display bold",15), text_color="#5f5f5f", pad=(12,0)),
-             sg.VerticalSeparator(),
-             sg.Button("Refresh", font=("sf ui display bold",11), k="-REFRESH-", tooltip="表の更新")]
-        ])
-
-        self.antable_frame = sg.Frame("Analyze", font=("sf ui display bold",22), layout=[
-            [sg.Combo(self.listbox_list, k="-ANLIST-", default_value=self.listbox_list[0], **analyze_listbox_style)],
-            [sg.Table(self.antable_list, k="-ANTABLE-", **analyze_table_style)]
-        ])
-
-        self.analyze_frame = [
-            [sg.Column(layout=[
-                [self.add_data_frame],
-                [self.antable_frame]
-            ])]
-        ]
-
         #Setting Tab
         self.setting_left = sg.Column([
             [sg.Checkbox('Darkmode', default=darkmode, font=('sf ui display bold', 14), k='-DARK-', pad=(5,2), tooltip="みんな大好きダークモードだぜ")],
@@ -111,15 +81,18 @@ class Interface:
 
         self.setting_right = sg.Column([
             [sg.Text('Custom Font', font=('sf ui display bold',14), k=UnsungHero.font_install, enable_events=True, pad=((5,16),2), text_color="#2d5cff", tooltip="画面がかっこよくなります")],
-            [sg.Text("Delete Log", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="自動保存したデータを削除できます", k=UnsungHero.clean_logs, enable_events=True)],
-            [sg.Text("Delete Report", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="Analyzeに使うデータを削除できます", k=UnsungHero.clean_reports, enable_events=True)],
+            [sg.Text("Clear Log", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="自動保存したデータを削除できます", k=UnsungHero.clean_logs, enable_events=True)],
+            [sg.Text("Clear Report", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="Analyzeに使うデータを削除できます", k=UnsungHero.clean_reports, enable_events=True)],
             [sg.Text("GitHub", font=("sf ui display bold",14), text_color="#2d5cff", tooltip="ソースコードはここをクリック", k=UnsungHero.view_source, enable_events=True)]
         ])
 
         self.settings_frame = sg.Frame('Setting', font=('sf ui display bold',30), layout=[
+            [sg.Input(font=("メイリオ",12), k="-STORE-", size=(23,1), tooltip="発団名を入れてや", default_text=UnsungHero.read_storename()),
+             sg.Button("Submit", font=("sf ui display bold",12), k="-SETNAME-", tooltip="名前を変えたら押してね")],
             [self.setting_left, sg.VerticalSeparator(pad=(10,5)), self.setting_right],
             [sg.Button('Restart', font=('sf ui display bold', 14), k='-RE-', tooltip="変更したら押してね"),
              sg.Text(f"¶ MogiCasher v{self.version}", font=("sf ui display light",12))]
+            
             ])
 
         self.setting_frame = [
@@ -129,17 +102,10 @@ class Interface:
         #Switchable Frame
         self.middle_frame = sg.Column([
             [UnsungHero.collapse(self.home_frame, self.tab_list[0].upper(), True)],
-            [UnsungHero.collapse(self.analyze_frame, self.tab_list[1].upper(), False)],
-            [UnsungHero.collapse(self.setting_frame, self.tab_list[2].upper(), False)]
+            [UnsungHero.collapse(self.setting_frame, self.tab_list[1].upper(), False)]
         ])
 
         #----------RIGHT AREA----------
-        #Store Name Frame
-        self.store_name = sg.Frame("Store Name", font=("sf ui display bold",20), layout=[
-            [sg.Button("Set", font=("sf ui display bold",11), k="-SETNAME-", tooltip="お名前をInputに打ってから押してください"),
-             sg.VerticalSeparator(),
-             sg.Text("Set Store Name", font=("sf ui display bold",14), text_color="#5f5f5f", k="-NAME-")]
-        ])
         #Database Frame
         self.database_frame = sg.Frame('Database', font=("sf ui display bold",30), layout=[
             [sg.Text("Current sales", font=('sf ui display bold',15))],
@@ -149,11 +115,10 @@ class Interface:
         ])
 
         self.right_frame = sg.Column(pad=((0,10),10), element_justification="C", layout=[
-            #[self.store_name],
             [self.database_frame]
             ])
 
-        self.window = sg.Window("( ’• ω •‘ )", layout=[[self.select_frame, self.middle_frame, self.right_frame]], **window_style)
+        self.window = sg.Window(f"{UnsungHero.read_storename()} ( • q • ) b", layout=[[self.select_frame, self.middle_frame, self.right_frame]], **window_style)
     
 
     def window_close(self):

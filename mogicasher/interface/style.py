@@ -1,7 +1,7 @@
 #----------style.py----------
 from performer.unsunghero import UnsungHero
 
-parent_dir = UnsungHero.parent_dir
+parent_dir = UnsungHero.system_dir
 
 #------Window Style------
 window_style = {

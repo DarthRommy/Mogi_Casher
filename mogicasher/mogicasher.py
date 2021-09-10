@@ -8,13 +8,16 @@ from performer.unsunghero import UnsungHero
 """
 めも：
 レイアウトと処理を別ファイルで書くことで機能の変更をしやすくしてみた。
+v1.5.3(beta)
+    1. 発団名を登録する機能を追加。⇒保存データの判別用
+    2. Analyzeは一旦捨てる。
 """
 
 class MogiCasher:
     @classmethod
     def main(cls):
         def_color = "lightblue1" #お好みで
-        version = "1.5.2"
+        version = "1.5.3β"
         def_database = UnsungHero.get_autosave()
 
         argsdict = {"color":def_color, "database":def_database, "version":version}
@@ -39,8 +42,8 @@ class MogiCasher:
 
 
     @classmethod
-    def control(cls, color, database, version, darkmode=False):
-        
+    def control(cls, color: str, database: list, version: str, darkmode=False):
+
         interface = Interface(color, database, version, darkmode)
         updater = Performer(window=interface.window)
         handler = Handler(updater)
@@ -48,7 +51,6 @@ class MogiCasher:
         database = interface.database
         history = interface.history
         tab_list = interface.tab_list
-        listbox_list = interface.listbox_list
         
         restart = False
         darkmode = False
@@ -61,18 +63,23 @@ class MogiCasher:
             except AttributeError:
                 pass
 
-            database, history = handler.handle(event, values, tab_list, database, history, listbox_list)
+            database, history = handler.handle(event, values, tab_list, database, history)
 
             darkmode = values["-DARK-"]
 
-            if event in [None, "-RE-", "exit"]:
-                if event == "-RE-":
+            if event in [None, "-RE-", "exit", "-SETNAME-"]:
+                if event in ["-RE-", "-SETNAME-"]:
                     restart = True
                 break
 
             interface.window["-INPUT-"].set_focus()
 
         interface.window_close()
+
+        #-----database != get_autosave()について-----
+            # get_autosaveはlogフォルダ内の最新のCSVを読み込む関数。
+            # 最新のCSVが現在のdatabaseと等しい=新しい売り上げはないといえる。
+            # そうでない場合にdatabaseを保存する。
 
         if not restart and database != UnsungHero.get_autosave():
             UnsungHero.save_profile(database)

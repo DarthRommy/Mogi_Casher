@@ -16,22 +16,20 @@ class Handler:
             "-CANCEL-": self.performer.cancel_checkout,
             "-PAY-": self.performer.checkout,
             "home": self.performer.change_layout,
-            "analyze": self.performer.change_layout,
             "setting": self.performer.change_layout,
             "exit": self.performer.change_layout,
-            "-REFRESH-": self.performer.refresh_analyze,
-            "-ANLIST-": self.performer.switch_analyze,
+            "-SETNAME-": self.performer.set_storename
         }
 
-    def handle(self, event, values, tab_list, database, history, listbox_list):
+    def handle(self, event, values, tab_list, database, history):
         if callable(event):
             event()
-            return database, history
 
-        elif event not in self.functions or event is None:
-            return database, history
-        
-        event_func = self.functions[event]
-        database, history = event_func(**{"event":event, "values":values, "tab_list":tab_list, "database": database, "history":history, "listbox_list": listbox_list})
+        elif event in self.functions:
+            event_func = self.functions[event]
+            database, history = event_func(**{"event":event, "values":values, "tab_list":tab_list, "database": database, "history":history})
+
+        else:
+            pass
         
         return database, history

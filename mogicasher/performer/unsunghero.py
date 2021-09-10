@@ -16,19 +16,19 @@ class UnsungHero:
     UnsungHero contains various functions that provides multiple features of this software.
     """
     @classmethod
-    def parent_dir(cls, target: str):
+    def system_dir(cls, target: str):
         """
-        parent_dir returns "system/target" folder path from current directory.
+        system_dir returns "system/target" path from current directory.
         
         Args:
             target str:
-                the folder you want to locate in "system" folder.
+                the file/folder you want to locate in "system" folder.
 
         Returns:
             str:
-                Path of the target folder.
+                Path of the target file/folder.
         """
-        return f"{os.getcwd()}/system/{target}"
+        return f"{os.getcwd()}\\system\\{target}"
 
 
     @classmethod
@@ -75,7 +75,7 @@ class UnsungHero:
                 Other: The imported data was correct.
         """
         # logフォルダ内のファイル一覧をゲットして作成日時で並べ替える
-        path = f"{UnsungHero.parent_dir('log')}/*.csv"
+        path = f"{UnsungHero.system_dir('log')}/*.csv"
         files = glob.glob(path)
         files.sort(reverse=True, key=lambda x: os.path.getctime(x))
 
@@ -127,21 +127,7 @@ class UnsungHero:
     
     @classmethod
     def calc_subtotal(cls, database: list, history: list):
-        """
-        calc_subtotal calculates the temporary sales from "database" and "history" list.
-        Used as: window[key].update(f"¥{update_totaly(database, history)}")
-
-        Args:
-            database [[str or int]]:
-                The list includes codes, prices and units sold. -> self.database
-
-            history [str]:
-                The temporary list of the codes until checkout. -> self.history
-
-        Returns:
-            int:
-                Will be displayed in the window.
-        """
+        
         subtotal = 0
         for x in database:
             subtotal += history.count(x[1])*x[2]
@@ -151,7 +137,7 @@ class UnsungHero:
     @classmethod
     def save_profile(cls, database: list, reference=False):
         
-        path = f"{UnsungHero.parent_dir('log')}"
+        path = f"{UnsungHero.system_dir('log')}"
         if not os.path.exists(path):
             os.mkdir(path)
 
@@ -161,23 +147,26 @@ class UnsungHero:
         else:
             extention = datetime.datetime.now().strftime("%m%d-%H%M")
 
+        #発団名
+        store_name = UnsungHero.read_storename()
+
         #DataFrameで表形式にする
         headings = ["", "CODE", "PRICE", "UNITS"]
         log_database = pd.DataFrame(database, columns=headings)
         log_database = log_database.set_index(headings[0])
 
-        log_database.to_csv(f"{path}/profile[{extention}].csv")
+        log_database.to_csv(f"{path}/profile[{store_name}]_{extention}.csv")
 
 
     @classmethod
     def clean_logs(cls):
-        target = f"{UnsungHero.parent_dir('log')}"
+        target = f"{UnsungHero.system_dir('log')}"
         shutil.rmtree(target)
         os.mkdir(target)
 
     @classmethod
     def clean_reports(cls):
-        target = f"{UnsungHero.parent_dir('report')}"
+        target = f"{UnsungHero.system_dir('report')}"
         shutil.rmtree(target)
         os.mkdir(target)
 
@@ -190,28 +179,24 @@ class UnsungHero:
 
 
     @classmethod
-    def add_profile(cls):
-
-        try:
-            file = sg.popup_get_file("", file_types=(("csv", "*profile*.csv"),), no_window=True)
-
-            copy_dir = f"{UnsungHero.parent_dir('report')}"
-            if os.path.exists(copy_dir):
-                os.mkdir
-
-            shutil.copy(file, copy_dir)
-
-        except FileNotFoundError:
-            pass
-
-
-    @classmethod
     def font_install(cls):
         
-        font_files = glob.glob(f"{UnsungHero.parent_dir('fonts')}/*.ttf")
+        font_files = glob.glob(f"{UnsungHero.system_dir('fonts')}/*.ttf")
         for x in font_files:
             # exe化した際に起きるエラーを防ぐためにこの形式を使う
             try:
                 subprocess.Popen(['start', '', f'{x}'], shell=True, **UnsungHero.subprocess_args(True))
             except (subprocess.CalledProcessError, IndexError, OSError):
                 pass
+
+
+    @classmethod
+    def read_storename(cls):
+        target = UnsungHero.system_dir("sys_name.txt")
+        try:
+            with open(target) as f:
+                text =  f.read()
+        except FileNotFoundError:
+            text = ""
+
+        return text

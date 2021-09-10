@@ -9,15 +9,15 @@ from performer.unsunghero import UnsungHero
 
 """
 eventごとの処理を記述した場所。
-またmogicasherからInterfaceのwindowが送られてくるので、それを使ってGUIを更新する。
+mogicasherからInterfaceのwindowが送られてくるので、それを使ってGUIを更新する。
 """
 class Performer:
     def __init__(self, window: sg.Window):
         self.window = window
-        self.dirname = UnsungHero.parent_dir
+        self.dirname = UnsungHero.system_dir
 
 
-    def change_layout(self, event, database, history, tab_list, listbox_list, **kwargs):
+    def change_layout(self, event, database, history, tab_list, **kwargs):
 
         for x in tab_list:
             change_image = f"{x}_image"
@@ -42,7 +42,7 @@ class Performer:
             return database, history
         
         #Exitボタン以外の時にタブを切り替える
-        for x in tab_list[:3]:
+        for x in tab_list[:2]:
             self.window[x.upper()].update(visible=True if x == event else False)
         
         return database, history
@@ -62,12 +62,11 @@ class Performer:
         try:
             # inputがcodesに含まれない場合↓でエラーを吐く
             tag = database[codes.index(code)][0]
-            price = database[codes.index(code)][2]
 
             history.append(code)
 
             # GUI更新
-            self.window["-RECENT-"].update(f">{tag} {code} ¥{price}")
+            self.window["-RECENT-"].update(f">{tag} {code}")
             self.window["-SUBTOTAL-"].update(f"¥{UnsungHero.calc_subtotal(database, history)}")
             self.window["-PAY-"].update(disabled=False)
             self.window["-CANCEL-"].update(disabled=False)
@@ -136,54 +135,12 @@ class Performer:
         return database, history
 
     
-    def refresh_analyze(self, database, history, listbox_list, **kwargs):
-        reports = glob.glob(f"{self.dirname('report')}/*.csv")
-        reports.sort()
+    def set_storename(self, values, database, history, **kwargs):
+        name = values["-STORE-"]
         
-        overall_list = []
-        files_list = listbox_list[:1]
+        target = (UnsungHero.system_dir("sys_name.txt"))
 
-        for f in reports:
-            try:
-                df = pd.read_csv(f, dtype={0: str, 1: str, 2: int, 3: int})
-                df = df.values.tolist()
-
-                for x in df:
-                    if len(x) > 4 or len(x) < 4:
-                        raise ValueError()
-
-                filename = os.path.splitext(os.path.basename(f))[0]
-
-                files_list.append(filename)
-                overall_list.append([filename, f"¥{UnsungHero.update_totaly(df)}"])
-
-            except (ValueError, IndexError):
-                pass
-
-        self.window["-ANLIST-"].update(values = files_list)
-        self.window["-ANLIST-"].update(set_to_index = 0)
-        self.window["-ANTABLE-"].update(overall_list)
-
-        return database, history
-
-
-    def switch_analyze(self, database, history, values, listbox_list, **kwargs):
-        if values["-ANLIST-"] == listbox_list[0]:
-            self.refresh_analyze(database, history, listbox_list)
-
-        else:
-            try:
-                path = f"{UnsungHero.parent_dir('report')}/{values['-ANLIST-']}.csv"
-                df = pd.read_csv(path)
-                df = df.values.tolist()
-
-                table_list = [[x[0], f"¥{x[2]*x[3]}"] for x in df]
-                table_list.append(["TOTAL", f"¥{UnsungHero.update_totaly(df)}"])
-
-            # ファイルが存在しない(Delete Reportした後)場合に発動
-            except FileNotFoundError:
-                table_list = [["File Not Found", "N/A"]]
-
-            self.window["-ANTABLE-"].update(table_list)
+        with open(target, mode="w") as f:
+            f.write(name)
 
         return database, history
