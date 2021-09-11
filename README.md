@@ -5,6 +5,7 @@
 ![pandas version](https://img.shields.io/badge/pandas-1.3.1-green)
 
 引継ぎでガチャガチャしそうやしGitHubに上げとくで。  
+ゆくゆくはオンライン化を見据えてHTMLに移植してみてる途中。
 
 # 目次
 1. [使い方](/README.md#使い方)
