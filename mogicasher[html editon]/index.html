@@ -27,6 +27,13 @@
 </head>
 
 <body>
+  <!-- Loading... -->
+  <div id="loading">
+    <div class="spinner">
+      <div class="cube1"></div>
+      <div class="cube2"></div>
+    </div>
+  </div>
   <!-- Navigation Area -->
   <div id="navbar">
     <div class="navigation-area">
@@ -61,14 +68,17 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <div class="dropdown-item table-switch">
-                    <label style="margin-bottom: 0%; margin-right: 1em;">
-                      <input type="checkbox" data-toggle="switch" checked="" data-on-color="primary" data-off-color="primary">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <strong>Table</strong>
+                    <label style="margin-bottom: -3%; margin-left: 3em; margin-right: -2em;">
+                      <input type="checkbox" data-toggle="switch" data-on-color="danger" data-off-color="danger" id="chk">
                       <span class="toggle"></span>
                     </label>
-                    <strong>Table</strong>
                   </div>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-item" onclick="storeName()">
+                    <i class="nc-icon nc-circle-10"></i>
+                    <strong>Store Name</strong>
+                  </div>
                 </div>
               </li>
               <li class="nav-item">
@@ -83,38 +93,21 @@
       </nav>
     </div>
   </div>
+
   <!-- Main Area -->
   <div class="page_header_image" style="background-image: url('./paper-kit-2/assets/img/header.jpg');">
     <div class="input-area">
-      <form>
-        <label for="inputBarcode">Barcode Input</label>
+      <label for="inputBarcode">Barcode Input</label>
+      <form name="form1" onsubmit="return false;">
         <div class="form-group">
           <input type="text" class="form-control input-barcode" id="inputBarcode" aria-describedby="emailHelp" placeholder="Read Barcode">
-          <button type="button" class="btn btn-outline-danger btn-submit" id="submit-barcode" onclick="display_recent()">Submit</button>
+          <button type="button" class="btn btn-outline-danger btn-submit" id="submit-barcode" onclick="display_recent(), logChkbox()">Submit</button>
         </div>
-        <small id="recent-barcode" class="form-text text-muted">Recent Barcode</small>
-        <!--
-        <div class="card-area animate__animated" id="card-area" style="visibility: hidden;">
-          <div class="card">
-            <div class="card-body">
-              <table class="table-main">
-                <tr class="h4">
-                  <th class="text-center">Tag</th> <th class="text-center">Code</th> <th class="text-center">Price</th> <th class="text-center">Units</th>
-                </tr>
-                <tr class="h4">
-                  <td>#1</td> <td>xxxxxxxx</td> <td>xxx</td> <td>xxx</td>
-                </tr>
-                <tr class="h4">
-                  <td>#2</td> <td>xxxxxxxx</td> <td>xxx</td> <td>xxx</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>-->
       </form>
+      <small id="recent-barcode" class="form-text text-muted">Recent Barcode</small>
     </div>
     <div class="moving-clouds" style="background-image: url('./paper-kit-2/assets/img/clouds.png');"></div>
-    
+
     <!-- Modal No Input Error -->
     <div class="modal fade bd-example-modal-sm error-no-input" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
@@ -134,6 +127,7 @@
         </div>
       </div>
     </div>
+
     <!-- Modal Unexpected Input Error -->
     <div class="modal fade bd-example-modal-sm error-unex-input" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
@@ -153,10 +147,35 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Store Name -->
+    <div class="modal fade storeName" tabindex="-1" role="dialog" aria-hidden="false" id="loginModal">
+      <div class="modal-dialog modal-register">
+        <div class="modal-content">
+          <div class="modal-header no-border-header text-center">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h6 class="text-muted">WASSUP</h6>
+            <h3 class="modal-title text-center">MOGI????</h3>
+            <p>Set Your Store Name</p>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label>Store Name</label>
+            <input type="text" value="" placeholder="Type here" class="form-control" id="inputStoreName"/>
+            </div>
+            <button class="btn btn-block btn-round" data-dismiss="modal"> Log in</button>
+          </div>
+          <div class="modal-footer no-border-footer" style="margin-bottom: 0; margin-top: 0; padding: 0;">
+            <button type="button" class="btn btn-default btn-link" data-dismiss="modal" onclick="clearStoreName()">Cancel</button>
+        </div>
+        </div>
+      </div>
+    </div>
   </div>
   
 </body>
-
 <!--   Core JS Files   -->
 <script src="./paper-kit-2/assets/js/core/jquery.min.js"></script>
 <script src="./paper-kit-2/assets/js/core/popper.min.js"></script>
@@ -178,7 +197,11 @@
 <!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
 <script src="./paper-kit-2/assets/js/paper-kit.min.js"></script>
 
+<!-- Require.js 
+<script data-main="./scripts/main.js" src="./scrpits/require.js"></script>-->
+
 <!-- Custom JavaScript File-->
-<script src="./scrpits/recent-barcode.js"></script>
+<script src="./scrpits/main.js"></script>
 <script src="./scrpits/clock.js"></script>
+<script src="./scrpits/loading.js"></script>
 </html>

@@ -1,14 +1,5 @@
 @charset "utf-8";
 
-h1 {
-    font-family: "sf ui display";
-}
-
-.message {
-    font-family: "sf ui display";
-}
-
-
 .main {
     padding: 20px;
 }
@@ -31,14 +22,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.alert {
-    margin-bottom: 0%;
-}
-
-.alert_yeahhh {
-    visibility: hidden;
 }
 
 .navigation-area {
@@ -69,25 +52,69 @@ th, td {
     padding: 20px 20px;
 }
 
-.card-area {
-    margin-top: 5%;
-}
-
-.table-main td{
-    background: #fff;
-}
-.table-main tr:nth-child(odd) td, th {
-    background: #ddd;
-}
-
-.show-table {
-    display: block;
+#loading {
+    width: 100vw;
+    height: 100vh;
+    transition: all 2s;
+    background-color: rgb(108, 126, 125);
     position: fixed;
-    right: 15px;
-    bottom: 30px;
-    z-index: 999;
+    top: 0%;
+    z-index: 9999;
+}
+.spinner {
+    margin: 100px auto;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -40px;
+    margin-left: -40px;
 }
 
-.table-switch {
-    display: inline-block;
+.cube1, .cube2 {
+    background-color: rgb(255, 255, 255);
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
+    animation: sk-cubemove 1.8s infinite ease-in-out;
 }
+
+.cube2 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+@-webkit-keyframes sk-cubemove {
+    25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
+    50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
+    75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
+    100% { -webkit-transform: rotate(-360deg) }
+}
+
+@keyframes sk-cubemove {
+    25% { 
+        transform: translateX(42px) rotate(-90deg) scale(0.5);
+        -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+    } 50% { 
+        transform: translateX(42px) translateY(42px) rotate(-179deg);
+        -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+    } 50.1% { 
+        transform: translateX(42px) translateY(42px) rotate(-180deg);
+        -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+    } 75% { 
+        transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+        -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+    } 100% { 
+        transform: rotate(-360deg);
+        -webkit-transform: rotate(-360deg);
+    }
+}
+.loaded {
+    opacity: 0;
+    visibility: hidden;
+  }
